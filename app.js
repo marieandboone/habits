@@ -249,7 +249,7 @@ function updateStreakTracker() {
 
   document.getElementById(
     "streak-title"
-  ).textContent = `${streakDuration}-Day Streak`;
+  ).textContent = `${streakDuration}-Day Challenge`;
 }
 
 // Load habits for a selected date
