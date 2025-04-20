@@ -1,0 +1,27 @@
+{
+  "theme_color": "#fff0e5",
+  "background_color": "#fff0e5",
+  "icons": [
+    {
+      "purpose": "maskable",
+      "sizes": "512x512",
+      "src": "icon.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "sizes": "512x512",
+      "src": "icon.png",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "portrait",
+  "display": "standalone",
+  "dir": "auto",
+  "lang": "en-US",
+  "name": "Habit tracker",
+  "short_name": "HT",
+  "start_url": "/habits/",
+  "scope": "/habits/",
+  "description": "10 Day Streak Habit Tracker"
+}
