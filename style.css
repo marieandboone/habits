@@ -1,0 +1,341 @@
+body {
+  font-family: "Roboto Mono", monospace;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f5f5f5;
+  color: #333;
+  position: relative;
+  margin-top: 0;
+}
+h1 {
+  text-align: left;
+  font-size: 2em;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-top: 0;
+}
+.date-display {
+  text-align: left;
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+.menu-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+  background: #f5f5f5;
+}
+.menu-icon:hover {
+  background: #eee;
+}
+.menu-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: #333;
+}
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 80%;
+  max-height: 80%;
+  overflow-y: auto;
+}
+.modal label {
+  font-size: 1em;
+  color: #333;
+}
+.modal input,
+.modal button {
+  padding: 8px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.modal button {
+  background: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.modal button:hover {
+  background: #555;
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+.habit-container {
+  background: #fff;
+  padding: 20px 20px 0 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+.todo-list {
+  font-size: 16px;
+  padding: 0.5em 1em;
+}
+.todo {
+  display: block;
+  position: relative;
+  padding: 1em 1em 1em 16%;
+  margin: 0 auto;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+.todo:last-child {
+  border-bottom: none;
+}
+.todo__state {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.todo__text {
+  color: #333;
+  transition: all 0.4s linear 0.4s;
+}
+.todo__icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  margin: auto;
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.todo__line,
+.todo__box,
+.todo__check {
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.9, 0, 0.5, 1);
+}
+.todo__circle {
+  stroke-dasharray: 1 6;
+  stroke-width: 0;
+  transform-origin: 13.5px 12.5px;
+  transform: scale(0.4) rotate(0deg);
+  animation: none 0.8s linear;
+}
+@keyframes explode {
+  30% {
+    stroke-width: 3;
+    stroke-opacity: 1;
+    transform: scale(0.8) rotate(40deg);
+  }
+  100% {
+    stroke-width: 0;
+    stroke-opacity: 0;
+    transform: scale(1.1) rotate(60deg);
+  }
+}
+.todo__box {
+  stroke: #000;
+  stroke-dasharray: 56.1053, 56.1053;
+  stroke-dashoffset: 0;
+  transition-delay: 0.16s;
+}
+.todo__check {
+  stroke: #000;
+  stroke-dasharray: 9.8995, 9.8995;
+  stroke-dashoffset: 9.8995;
+  transition-duration: 0.32s;
+}
+.todo__line {
+  stroke: #000;
+  stroke-dasharray: 168, 1684;
+  stroke-dashoffset: 168;
+}
+.todo__circle {
+  stroke: #000;
+  animation-delay: 0.56s;
+  animation-duration: 0.56s;
+}
+.todo__state:checked ~ .todo__text {
+  transition-delay: 0s;
+  color: #777;
+  opacity: 0.6;
+}
+.todo__state:checked ~ .todo__icon .todo__box {
+  stroke-dashoffset: 56.1053;
+  transition-delay: 0s;
+}
+.todo__state:checked ~ .todo__icon .todo__line {
+  stroke-dashoffset: -8;
+}
+.todo__state:checked ~ .todo__icon .todo__check {
+  stroke-dashoffset: 0;
+  transition-delay: 0.48s;
+}
+.todo__state:checked ~ .todo__icon .todo__circle {
+  animation-name: explode;
+}
+.progress-circle {
+  position: relative;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+.progress-circle svg {
+  width: 120px;
+  height: 120px;
+}
+.progress-circle .circle-bg {
+  fill: none;
+  stroke: #e0e0e0;
+  stroke-width: 8;
+}
+.progress-circle .circle-progress {
+  fill: none;
+  stroke: #333;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.5s ease;
+}
+.progress-circle span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.2em;
+  color: #333;
+}
+
+#progress-text {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s;
+  max-width: 400px;
+  margin-bottom: 10px;
+}
+button:hover {
+  background: #555;
+}
+#streak-tracker {
+  margin-top: 20px;
+  text-align: center;
+  max-width: 400px;
+}
+#streak-tracker h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+.streak-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
+  gap: 10px;
+  justify-items: center;
+}
+.streak-day {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #333;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+  cursor: pointer;
+}
+.streak-day.completed {
+  background: #333;
+  color: #fff;
+}
+.streak-day:hover {
+  background: #eee;
+}
+.todo-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+.habit-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.habit-item input {
+  flex-grow: 1;
+  padding: 5px;
+  margin-right: 5px;
+}
+.habit-item .delete-button {
+  background: #ff5555;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
+}
+.add-button {
+  background: #4caf50;
+  margin-top: 10px;
+}
+.edit-button {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1;
+  width: 16px;
+  padding: 0;
+  margin: 0;
+  display: none;
+}
+.edit-button svg {
+  width: 16px;
+  height: 16px;
+  color: #333;
+}
